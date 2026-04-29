@@ -3,10 +3,12 @@ package com.springClass.learningRestApi.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 // Way 2
 @Data
 @AllArgsConstructor
+@NoArgsConstructor
 public class StudentDTO {
     private long id;
     private String name;
