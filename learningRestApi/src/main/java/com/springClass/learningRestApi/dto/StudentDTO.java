@@ -1,6 +1,9 @@
 package com.springClass.learningRestApi.dto;
 
 
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Size;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -11,7 +14,12 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class StudentDTO {
     private long id;
+
+    @Size(min = 3, max = 50, message = "Name Should be between length 3 to 50")
     private String name;
+
+    @Email
+    @NotBlank(message = "Email is Required")
     private String email;
 
 //    Way 1.
