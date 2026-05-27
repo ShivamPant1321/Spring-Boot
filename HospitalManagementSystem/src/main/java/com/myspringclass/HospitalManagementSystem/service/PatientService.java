@@ -16,7 +16,7 @@ public class PatientService {
     @Transactional
     public Patient getPatientById(Long id){
         Patient p1 = patientRepository.findById(id).orElseThrow();
-        Patient p2 = patientRepository.findById(id).orElseThrow();
+//        Patient p2 = patientRepository.findById(id).orElseThrow();
         return p1;
     }
 
