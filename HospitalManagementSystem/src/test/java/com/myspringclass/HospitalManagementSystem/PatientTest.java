@@ -8,6 +8,9 @@ import com.myspringclass.HospitalManagementSystem.service.PatientService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.time.LocalDate;
 import java.util.Arrays;
@@ -52,9 +55,14 @@ public class PatientTest {
 //        int rowsUpdate = patientRepository.updateNameWithId("Madhav", 4L);
 //        System.out.println(rowsUpdate);
 
-        List<GenderResponseEntity> genderList = patientRepository.countGenderType();
-        for(GenderResponseEntity rsp : genderList){
-            System.out.println(rsp);
+//        List<GenderResponseEntity> genderList = patientRepository.countGenderType();
+//        for(GenderResponseEntity rsp : genderList){
+//            System.out.println(rsp);
+//        }
+
+        Page<Patient> pageList = patientRepository.findAllPatientPagination(PageRequest.of(1, 2, Sort.by("name")));
+        for (Patient patient : pageList.getContent()) {
+            System.out.println(patient);
         }
 
     }
