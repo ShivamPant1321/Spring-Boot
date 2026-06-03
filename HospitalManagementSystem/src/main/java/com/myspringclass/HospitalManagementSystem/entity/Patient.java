@@ -10,6 +10,7 @@ import org.hibernate.annotations.CreationTimestamp;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -47,11 +48,13 @@ public class Patient {
     @Enumerated(EnumType.STRING)
     private BloodGroupType blood_group;
 
-//    @JoinColumn(name = "insurance_id")
-    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}) // owning side
+//    @OneToOne(cascade = {CascadeType.MERGE, CascadeType.PERSIST}) // owning side
+    @OneToOne(cascade = CascadeType.ALL, orphanRemoval = true)  // when we want to remove the child from the db while keeping the parent then we use orphanRemoval = true
+    @JoinColumn(name = "insurance_id")
     private Insurance insurance;
 
-    @OneToMany(mappedBy = "patient")
-    private List<Appointment> appointments;
+//    @ToString.Exclude
+    @OneToMany(mappedBy = "patient", cascade = {CascadeType.REMOVE}, orphanRemoval = true, fetch = FetchType.EAGER) // this will cause N+1 problem as for every Patient the Hibernate will use select statement multiple times to fetch all the appointments associated to that patient.
+    private List<Appointment> appointments = new ArrayList<>();
 
 }

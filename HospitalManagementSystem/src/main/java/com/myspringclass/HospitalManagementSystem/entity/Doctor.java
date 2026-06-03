@@ -4,6 +4,7 @@ package com.myspringclass.HospitalManagementSystem.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
@@ -27,8 +28,8 @@ public class Doctor {
     @Column(nullable = false, unique = true, length = 100)
     private String email;
 
-//    @OneToMany(mappedBy = "doctor")
-//    private List<Appointment> appointments;
+    @OneToMany(mappedBy = "doctor")
+    private List<Appointment> appointments = new ArrayList<>();
 
     @ManyToMany(mappedBy = "doctors")
     private Set<Department> departments;
