@@ -2,6 +2,7 @@ package com.codingshuttle.youtube.hospitalManagement.controller;
 
 import com.codingshuttle.youtube.hospitalManagement.dto.LoginRequestdto;
 import com.codingshuttle.youtube.hospitalManagement.dto.LoginResponsedto;
+import com.codingshuttle.youtube.hospitalManagement.dto.SignUpResponsedto;
 import com.codingshuttle.youtube.hospitalManagement.security.AuthService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -20,5 +21,10 @@ public class AuthController {
     @PostMapping("/login")
     public ResponseEntity<LoginResponsedto> login(@RequestBody LoginRequestdto loginRequestdto){
         return ResponseEntity.ok(authService.login(loginRequestdto));
+    }
+
+    @PostMapping("/signup")
+    public ResponseEntity<SignUpResponsedto> signup(@RequestBody LoginRequestdto signUpRequestdto){
+        return ResponseEntity.ok(authService.signup(signUpRequestdto));
     }
 }
