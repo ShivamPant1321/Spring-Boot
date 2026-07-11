@@ -1,0 +1,8 @@
+#spring.security.oauth2:
+#  registration:
+#    google:
+#      client-id: aklnfka
+#      client-secret: aklnfka
+#    github:
+#      client-id: fndknas
+#      client-secret: fndknas

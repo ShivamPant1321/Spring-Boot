@@ -25,7 +25,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
     private final UserRepository userRepository;
     private final AuthUtil authUtil;
 
-    private final HandlerExceptionResolver exceptionResolver;
+    private final HandlerExceptionResolver handlerExceptionResolver;
 
     @Override
     public void doFilterInternal(HttpServletRequest req, HttpServletResponse res, FilterChain chain) throws IOException, ServletException {
@@ -34,7 +34,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
             log.info("Incoming request: "+req.getRequestURI());
 
             final String requestTokenHeader = req.getHeader("Authorization");
-            if(requestTokenHeader == null && !requestTokenHeader.startsWith("Bearer ")) {
+            if(requestTokenHeader == null || !requestTokenHeader.startsWith("Bearer ")) {
                 chain.doFilter(req, res);
                 return;
             }
@@ -49,7 +49,7 @@ public class JwtAuthFilter extends OncePerRequestFilter {
 
             chain.doFilter(req, res);
         } catch (Exception e) {
-            exceptionResolver.resolveException(req, res, e, null);
+            handlerExceptionResolver.resolveException(req, res, null, e);
         }
     }
 }

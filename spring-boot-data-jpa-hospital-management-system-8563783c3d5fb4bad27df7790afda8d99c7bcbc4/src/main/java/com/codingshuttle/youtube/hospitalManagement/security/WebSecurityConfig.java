@@ -2,9 +2,9 @@ package com.codingshuttle.youtube.hospitalManagement.security;
 
 
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.config.Customizer;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -13,7 +13,8 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 @Configuration
 @RequiredArgsConstructor
-public class securityFilterChain {
+@Slf4j
+public class WebSecurityConfig {
 
     private final PasswordEncoder passwordEncoder;
     private final JwtAuthFilter jwtAuthFilter;
@@ -30,6 +31,9 @@ public class securityFilterChain {
 //                        .requestMatchers("/doctors/**").hasAnyRole("DOCTOR", "ADMIN")
                         .anyRequest().authenticated()
                 )
+                .oauth2Login(oAuth2-> oAuth2.failureHandler((req, res, e) -> {
+                    log.error("OAUTH2 failure occurred", e.getMessage());
+                }))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 //                .formLogin(Customizer.withDefaults());
         return httpSecurity.build();
