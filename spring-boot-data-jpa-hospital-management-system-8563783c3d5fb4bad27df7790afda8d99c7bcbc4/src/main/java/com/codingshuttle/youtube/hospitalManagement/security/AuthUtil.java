@@ -1,10 +1,13 @@
 package com.codingshuttle.youtube.hospitalManagement.security;
 
 import com.codingshuttle.youtube.hospitalManagement.entity.User;
+import com.codingshuttle.youtube.hospitalManagement.entity.type.AuthProviderType;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.oauth2.core.user.OAuth2User;
 import org.springframework.stereotype.Component;
 
 import javax.crypto.SecretKey;
@@ -13,6 +16,7 @@ import java.util.Base64;
 import java.util.Date;
 
 @Component
+@Slf4j
 public class AuthUtil {
 
     @Value("${jwt.secretKey}")
@@ -36,5 +40,31 @@ public class AuthUtil {
         Claims claim = Jwts.parser().verifyWith(getSecretKey()).build().parseSignedClaims(token).getPayload();
         return claim.getSubject();
 
+    }
+    public AuthProviderType getProviderTypeFromRegistrationId(String registrationId) {
+        return switch (registrationId.toLowerCase()){
+            case "google" -> AuthProviderType.GOOGLE;
+            case "faceboook" -> AuthProviderType.FACEBOOK;
+            case "github" -> AuthProviderType.GITHUB;
+            case "twitter" -> AuthProviderType.TWITTER;
+            default -> throw new IllegalArgumentException("Unsupported OAuth2 provider: "+registrationId);
+        };
+    }
+
+    public String determineProviderIdFromOAuth2User(OAuth2User oAuth2User, String registrationId) {
+        String providerId = switch(registrationId.toLowerCase()){
+            case "google" -> oAuth2User.getAttribute("sub");
+            case "github" -> oAuth2User.getAttribute("id").toString();
+            default -> {
+                log.error("Unsupported OAuth2 provider: "+registrationId);
+                throw new IllegalArgumentException("Unsupported OAuth2 provider: "+registrationId);
+            }
+        };
+
+        if (providerId == null || providerId.isBlank()){
+            log.error("Unable to determine provider id for provider: {}"+registrationId);
+            throw new IllegalArgumentException("Unable to determine provider id for OAuth2 login");
+        }
+        return providerId;
     }
 }

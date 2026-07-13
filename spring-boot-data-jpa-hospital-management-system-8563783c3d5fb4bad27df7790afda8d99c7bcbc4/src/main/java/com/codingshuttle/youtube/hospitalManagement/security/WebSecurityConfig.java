@@ -33,6 +33,8 @@ public class WebSecurityConfig {
                 )
                 .oauth2Login(oAuth2-> oAuth2.failureHandler((req, res, e) -> {
                     log.error("OAUTH2 failure occurred", e.getMessage());
+                }).successHandler((req, res, auth) -> {
+
                 }))
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class);
 //                .formLogin(Customizer.withDefaults());

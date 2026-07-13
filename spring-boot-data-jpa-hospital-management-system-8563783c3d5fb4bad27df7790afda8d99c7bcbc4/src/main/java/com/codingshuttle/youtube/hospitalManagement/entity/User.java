@@ -1,6 +1,7 @@
 package com.codingshuttle.youtube.hospitalManagement.entity;
 
 
+import com.codingshuttle.youtube.hospitalManagement.entity.type.AuthProviderType;
 import jakarta.persistence.*;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
@@ -26,6 +27,12 @@ public class User implements UserDetails {
     private String username;
 
     private String password;
+
+
+    private String providerId;
+
+    @Enumerated(EnumType.STRING)
+    private AuthProviderType authProviderType;
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
