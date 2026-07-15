@@ -7,9 +7,11 @@ import com.codingshuttle.youtube.hospitalManagement.dto.SignUpResponsedto;
 import com.codingshuttle.youtube.hospitalManagement.entity.User;
 import com.codingshuttle.youtube.hospitalManagement.entity.type.AuthProviderType;
 import com.codingshuttle.youtube.hospitalManagement.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -40,18 +42,28 @@ public class AuthService {
 
     }
 
-    public SignUpResponsedto signup(LoginRequestdto signUpRequestdto) {
+    public User signUpInternal(LoginRequestdto signUpRequestdto, AuthProviderType authProviderType, String providerId){
         User user = userRepository.findByUsername(signUpRequestdto.getUsername()).orElse(null);
 
         if (user != null){
             throw new IllegalStateException("Username is already exists");
         }
 
-        user = userRepository.save(User.builder().username(signUpRequestdto.getUsername()).password(passwordEncoder.encode(signUpRequestdto.getPassword())).build());
+        user = User.builder().username(signUpRequestdto.getUsername()).providerId(providerId).authProviderType(authProviderType).build();
+        if (authProviderType == AuthProviderType.EMAIL){
+            user.setPassword(passwordEncoder.encode(signUpRequestdto.getPassword()));
+        }
 
+        return userRepository.save(user);
+    }
+
+    //login controller
+    public SignUpResponsedto signup(LoginRequestdto signUpRequestdto) {
+        User user = signUpInternal(signUpRequestdto, AuthProviderType.EMAIL, null);
         return new SignUpResponsedto(user.getId(), user.getUsername());
     }
 
+    @Transactional
     public ResponseEntity<LoginResponsedto> handleOAuth2LoginRequest(OAuth2User oAuth2User, String registrationId) {
         // provider type and provider id
         // save the provider id and provider type info with user
@@ -63,6 +75,25 @@ public class AuthService {
 
         User user = userRepository.findByProviderIdAndProviderType(providerId, providerType).orElse(null);
 
+        String email = oAuth2User.getAttribute("email");
+        User emailUser =  userRepository.findByUsername(email).orElse(null);
+
+        if(user == null && emailUser == null){
+            String username = authUtil.determineUsernameFromOAuth2User(oAuth2User, registrationId, providerId);
+            user =signUpInternal(new LoginRequestdto(username, null), providerType, providerId);
+
+        }else if(user != null){
+            if(email != null && !email.isBlank() && !email.equals(user.getUsername())){
+                user.setUsername(email);
+                userRepository.save(user);
+            }
+        }else{
+            throw new BadCredentialsException("This email is allready registered with provider: "+email);
+        }
+
+        LoginResponsedto loginResponsedto = new LoginResponsedto(authUtil.generateAccessToken(user), user.getId());
+
+        return ResponseEntity.ok(loginResponsedto);
 
     }
 }
