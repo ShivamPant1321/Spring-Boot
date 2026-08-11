@@ -1,14 +1,17 @@
 package com.codingshuttle.youtube.hospitalManagement.controller;
 
 import com.codingshuttle.youtube.hospitalManagement.dto.AppointmentResponseDto;
+import com.codingshuttle.youtube.hospitalManagement.entity.User;
 import com.codingshuttle.youtube.hospitalManagement.service.AppointmentService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
+import java.util.Objects;
 
 @RestController
 @RequestMapping("/doctors")
@@ -19,7 +22,8 @@ public class DoctorController {
 
     @GetMapping("/appointments")
     public ResponseEntity<List<AppointmentResponseDto>> getAllAppointmentsOfDoctor() {
-        return ResponseEntity.ok(appointmentService.getAllAppointmentsOfDoctor(1L));
+        User user = (User) Objects.requireNonNull(SecurityContextHolder.getContext().getAuthentication()).getPrincipal();
+        return ResponseEntity.ok(appointmentService.getAllAppointmentsOfDoctor(Objects.requireNonNull(user).getId()));
     }
 
 }

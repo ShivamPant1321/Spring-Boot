@@ -1,13 +1,16 @@
 package com.codingshuttle.youtube.hospitalManagement.controller;
 
+import com.codingshuttle.youtube.hospitalManagement.dto.DoctorResponseDto;
+import com.codingshuttle.youtube.hospitalManagement.dto.OnboardRequestDto;
 import com.codingshuttle.youtube.hospitalManagement.dto.PatientResponseDto;
+import com.codingshuttle.youtube.hospitalManagement.service.DoctorService;
 import com.codingshuttle.youtube.hospitalManagement.service.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,6 +20,7 @@ import java.util.List;
 public class AdminController {
 
     private final PatientService patientService;
+    private final DoctorService doctorService;
 
     @GetMapping("/patients")
     public ResponseEntity<List<PatientResponseDto>> getAllPatients(
@@ -24,5 +28,10 @@ public class AdminController {
             @RequestParam(value = "size", defaultValue = "10") Integer pageSize
     ) {
         return ResponseEntity.ok(patientService.getAllPatients(pageNumber, pageSize));
+    }
+
+    @PostMapping("/onBoardNewDoctor")
+    public ResponseEntity<DoctorResponseDto> onBoardNewDoctor(@RequestBody OnboardRequestDto onboardRequestDto){
+        return ResponseEntity.status(HttpStatus.CREATED).body(doctorService.onBoardNewDoctor(onboardRequestDto));
     }
 }

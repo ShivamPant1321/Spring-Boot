@@ -1,19 +1,29 @@
 package com.codingshuttle.youtube.hospitalManagement.service;
 
 import com.codingshuttle.youtube.hospitalManagement.dto.DoctorResponseDto;
+import com.codingshuttle.youtube.hospitalManagement.dto.OnboardRequestDto;
+import com.codingshuttle.youtube.hospitalManagement.entity.Doctor;
+import com.codingshuttle.youtube.hospitalManagement.entity.User;
+import com.codingshuttle.youtube.hospitalManagement.entity.type.RoleType;
 import com.codingshuttle.youtube.hospitalManagement.repository.DoctorRepository;
+import com.codingshuttle.youtube.hospitalManagement.repository.UserRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
+import java.util.Objects;
 import java.util.stream.Collectors;
 
 @Service
 @RequiredArgsConstructor
 @Slf4j
 public class DoctorService {
+    private final UserRepository userRepository;
 
     private final DoctorRepository doctorRepository;
     private final ModelMapper modelMapper;
@@ -26,4 +36,22 @@ public class DoctorService {
     }
 
 
+    @Transactional
+    public DoctorResponseDto onBoardNewDoctor(OnboardRequestDto onboardRequestDto) {
+        User user = userRepository.findById(onboardRequestDto.getUserId()).orElse(null);
+
+        if (doctorRepository.existsById(Objects.requireNonNull(user).getId())) {
+            throw new ResponseStatusException(HttpStatus.CONFLICT, "Doctor already exists");
+        }
+
+        Doctor doctor = Doctor.builder()
+                .name(onboardRequestDto.getName())
+                .specialization(onboardRequestDto.getSpecialization())
+                .user(user)
+                .build();
+
+        user.getRoles().add(RoleType.DOCTOR);
+
+        return modelMapper.map(doctorRepository.save(doctor), DoctorResponseDto.class);
+    }
 }
