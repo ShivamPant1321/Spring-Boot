@@ -1,5 +1,10 @@
 spring:
   data:
     mongodb:
-      uri: mongodb://admin:password@localhost:27017/ecommerce?authSource=admin
+      uri: mongodb://localhost:27017/ecommerce?authSource=admin
       auto-index-creation: true
+
+logging:
+  level:
+    org.springframework.data.mongodb:
+      core.MongoTemplate: DEBUG
