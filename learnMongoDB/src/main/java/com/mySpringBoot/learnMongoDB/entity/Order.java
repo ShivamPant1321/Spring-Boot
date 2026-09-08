@@ -7,14 +7,17 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.mongodb.core.index.CompoundIndex;
 import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 @Document(collection = "orders")
 @CompoundIndex(name = "idx_quantity_status", def = "{'quantity': 1, 'status': 1}")
+@CompoundIndex(name = "idx_address_city", def = "{ 'adress.city': -1 }")
 public class Order {
     @Id
     private String id;
@@ -30,5 +33,10 @@ public class Order {
 
     @LastModifiedDate
     private LocalDateTime updatedAt;
+
+    private Address address;
+
+    @DBRef(lazy = true)
+    private List<Products> products;
 
 }
