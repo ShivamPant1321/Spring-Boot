@@ -3,10 +3,7 @@ package com.SpringBootProject.MyHospitalManagementSystem.entity;
 import com.SpringBootProject.MyHospitalManagementSystem.entity.type.BloodGroupType;
 import com.SpringBootProject.MyHospitalManagementSystem.entity.type.Gender;
 import jakarta.persistence.*;
-import jakarta.validation.constraints.Max;
-import jakarta.validation.constraints.Min;
-import jakarta.validation.constraints.NotBlank;
-import jakarta.validation.constraints.Size;
+import jakarta.validation.constraints.*;
 import lombok.*;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
@@ -30,37 +27,41 @@ public class Patient {
     private UUID id;
 
     @NotBlank(message = "First name is required")
-    @Size(max = 20)
+    @Size(max = 20, message = "First name cannot exceed 20 characters")
     @Column(nullable = false)
     private String firstName;
 
     @NotBlank(message = "Last name is required")
-    @Size(max = 20)
+    @Size(max = 20, message = "Last name cannot exceed 20 characters")
     @Column(nullable = false)
     private String lastName;
 
-
+    @NotNull(message = "Birth date is required")
     @Column(nullable = false)
     private LocalDate birthDate;
 
+    @NotNull(message = "Gender is required")
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
+
+    @NotNull(message = "Blood Group is required")
     @Column(nullable = false)
     @Enumerated(EnumType.STRING)
     private BloodGroupType bloodGroup;
 
-    @Max(10)
-    @Min(10)
     @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must contain exactly 10 digits")
     @Column(nullable = false, length = 10, unique = true)
     private String phoneNumber;
 
+    @NotBlank(message = "Address is required")
     @Column(nullable = false)
     private String address;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp

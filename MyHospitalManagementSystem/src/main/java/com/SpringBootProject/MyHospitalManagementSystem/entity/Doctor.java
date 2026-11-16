@@ -27,35 +27,40 @@ public class Doctor {
     private UUID id;
 
     @NotBlank(message = "First name is required")
-    @Size(max = 20)
+    @Size(max = 20, message = "First name cannot exceed 20 characters")
     @Column(nullable = false, length = 20)
     private String firstName;
 
     @NotBlank(message = "Last name is required")
-    @Size(max = 20)
+    @Size(max = 20, message = "Last name cannot exceed 20 characters")
     @Column(nullable = false, length = 20)
     private String lastName;
 
     @Email
+    @NotBlank(message = "Email is required")
     @Column(nullable = false, unique = true)
     private String email;
 
+    @NotBlank(message = "Speciality is required")
     @Column(nullable = false)
     private String specialty;
 
+    @NotNull(message = "Birth date is required")
     @Column(nullable = false)
     private LocalDate dateOfBirth;
 
-    @Max(10)
-    @Min(10)
+    @NotBlank(message = "Phone number is required")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Phone number must contain exactly 10 digits")
     @Column(nullable = false, length = 10, unique = true)
     private String phoneNumber;
 
     @Column(nullable = false)
+    @NotNull(message = "Gender is required")
     @Enumerated(EnumType.STRING)
     private Gender gender;
 
     @CreationTimestamp
+    @Column(updatable = false)
     private LocalDateTime createdAt;
 
     @UpdateTimestamp
@@ -64,4 +69,8 @@ public class Doctor {
     @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @ToString.Exclude
     private List<Appointments> appointmentsList = new ArrayList<>();
+
+    @ToString.Exclude
+    @ManyToMany(mappedBy = "doctors", fetch = FetchType.LAZY)
+    private List<Department>  departmentList = new ArrayList<>();
 }
