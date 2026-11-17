@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @ToString
 @RequiredArgsConstructor
 @AllArgsConstructor
+@Builder
 public class Insurance {
 
     @Id

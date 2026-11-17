@@ -20,6 +20,7 @@ import java.util.UUID;
 @ToString
 @AllArgsConstructor
 @RequiredArgsConstructor
+@Builder
 public class Patient {
 
     @Id
@@ -38,6 +39,7 @@ public class Patient {
 
     @NotNull(message = "Birth date is required")
     @Column(nullable = false)
+    @Past(message = "Birth date must be in the past")
     private LocalDate birthDate;
 
     @NotNull(message = "Gender is required")
@@ -68,12 +70,17 @@ public class Patient {
     private LocalDateTime updatedAt;
 
     @ToString.Exclude
+    @Builder.Default
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL,  orphanRemoval = true)
-    List<Appointments> appointments = new ArrayList<>();
+    private List<Appointments> appointments = new ArrayList<>();
 
     @ToString.Exclude
     @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "insurance_id", unique = true)
     private Insurance insurance;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private Nurse nurse;
 }
 
