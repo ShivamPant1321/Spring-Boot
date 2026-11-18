@@ -77,4 +77,8 @@ public class Doctor {
     @Builder.Default
     @ManyToMany(mappedBy = "doctors", fetch = FetchType.LAZY)
     private List<Department>  departmentList = new ArrayList<>();
+
+    @OneToMany(mappedBy = "doctor", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Prescription> prescriptions = new ArrayList<>();
 }

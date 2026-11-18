@@ -82,5 +82,9 @@ public class Patient {
     @ManyToOne(fetch = FetchType.LAZY)
     @ToString.Exclude
     private Nurse nurse;
+
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    @ToString.Exclude
+    private List<Prescription> prescriptions = new ArrayList<>();
 }
 
