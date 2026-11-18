@@ -18,7 +18,6 @@ import java.util.UUID;
 @Setter
 @ToString
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor
 @Builder
 public class Doctor {

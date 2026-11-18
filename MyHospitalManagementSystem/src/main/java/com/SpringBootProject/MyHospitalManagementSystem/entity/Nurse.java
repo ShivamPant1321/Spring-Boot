@@ -57,10 +57,9 @@ public class Nurse {
     @UpdateTimestamp
     private LocalDateTime updatedAt;
 
-    @OneToMany(fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "nurse", fetch = FetchType.LAZY)
     @ToString.Exclude
     @Builder.Default
-    @JoinColumn(name = "nurse_id", nullable = false)
     private List<Patient> patientList = new ArrayList<>();
 
     @ManyToOne(fetch = FetchType.LAZY)

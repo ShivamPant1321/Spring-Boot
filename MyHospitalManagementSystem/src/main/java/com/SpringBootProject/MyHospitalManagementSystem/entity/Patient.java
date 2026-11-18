@@ -80,6 +80,7 @@ public class Patient {
     private Insurance insurance;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "nurse_id")
     @ToString.Exclude
     private Nurse nurse;
 
