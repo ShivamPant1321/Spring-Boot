@@ -20,3 +20,22 @@ VALUES
     (gen_random_uuid(), 'Tanya', 'Arora', '1986-10-19', 'FEMALE', 'A_pos', '9876543227', 'Sarabha Nagar, Ludhiana, Punjab', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
     (gen_random_uuid(), 'Dev', 'Nair', '2004-07-11', 'MALE', 'AB_neg', '9876543228', 'Kakkanad, Kochi, Kerala', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
     (gen_random_uuid(), 'Ritika', 'Das', '1994-01-08', 'FEMALE', 'O_pos', '9876543229', 'Ballygunge, Kolkata, West Bengal', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
+
+
+INSERT INTO doctor (id, first_name, last_name, email, specialty, date_of_birth, phone_number, gender, created_at, updated_at)
+VALUES
+    (gen_random_uuid(), 'Aarav', 'Sharma', 'aarav.sharma@hospital.com', 'Cardiology', '1982-04-15', '9876543210', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Priya', 'Patel', 'priya.patel@hospital.com', 'Neurology', '1986-09-22', '9876543211', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Rohan', 'Verma', 'rohan.verma@hospital.com', 'Orthopedics', '1979-11-03', '9876543212', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Meera', 'Nair', 'meera.nair@hospital.com', 'Pediatrics', '1990-02-18', '9876543213', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Vikram', 'Singh', 'vikram.singh@hospital.com', 'Dermatology', '1985-07-30', '9876543214', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Ananya', 'Gupta', 'ananya.gupta@hospital.com', 'Gynecology', '1988-03-12', '9876543215', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Kabir', 'Malhotra', 'kabir.malhotra@hospital.com', 'Oncology', '1977-08-25', '9876543216', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Sneha', 'Reddy', 'sneha.reddy@hospital.com', 'Ophthalmology', '1991-06-09', '9876543217', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Arjun', 'Mehta', 'arjun.mehta@hospital.com', 'Psychiatry', '1983-12-19', '9876543218', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Kavya', 'Joshi', 'kavya.joshi@hospital.com', 'Endocrinology', '1989-01-27', '9876543219', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Siddharth', 'Kapoor', 'siddharth.kapoor@hospital.com', 'Gastroenterology', '1980-05-14', '9876543220', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Neha', 'Bansal', 'neha.bansal@hospital.com', 'Radiology', '1987-10-05', '9876543221', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Aditya', 'Kulkarni', 'aditya.kulkarni@hospital.com', 'Urology', '1984-02-28', '9876543222', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Pooja', 'Desai', 'pooja.desai@hospital.com', 'Pulmonology', '1992-07-11', '9876543223', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
+    (gen_random_uuid(), 'Manish', 'Tiwari', 'manish.tiwari@hospital.com', 'General Surgery', '1976-09-08', '9876543224', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);

@@ -1,9 +1,11 @@
 package com.SpringBootProject.MyHospitalManagementSystem.services.serviceImplementation;
 
+import com.SpringBootProject.MyHospitalManagementSystem.dto.PatientDto;
 import com.SpringBootProject.MyHospitalManagementSystem.entity.Patient;
 import com.SpringBootProject.MyHospitalManagementSystem.repository.PatientRepository;
 import com.SpringBootProject.MyHospitalManagementSystem.services.PatientService;
 import lombok.RequiredArgsConstructor;
+import org.modelmapper.ModelMapper;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -16,13 +18,22 @@ public class PatientServiceImpl implements PatientService {
 
     private final PatientRepository patientRepository;
 
+    private final ModelMapper modelMapper;
+
     @Override
-    public List<Patient> getAllPatient() {
-        return new ArrayList<>(patientRepository.findAll());
+    public List<PatientDto> getAllPatient() {
+        List<Patient> patientList = patientRepository.findAll();
+        List<PatientDto>  patientDtoList = new ArrayList<>();
+        for (Patient patient : patientList) {
+            PatientDto patientDto = modelMapper.map(patient, PatientDto.class);
+            patientDtoList.add(patientDto);
+        }
+        return patientDtoList;
     }
 
     @Override
-    public Patient getPatientById(UUID id) {
-        return patientRepository.findById((UUID) id).orElseThrow();
+    public PatientDto getPatientById(UUID id) {
+        Patient patient = patientRepository.findById(id).orElseThrow();
+        return modelMapper.map(patient, PatientDto.class);
     }
 }

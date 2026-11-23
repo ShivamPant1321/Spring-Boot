@@ -1,5 +1,6 @@
 package com.SpringBootProject.MyHospitalManagementSystem.services;
 
+import com.SpringBootProject.MyHospitalManagementSystem.dto.PatientDto;
 import com.SpringBootProject.MyHospitalManagementSystem.entity.Patient;
 
 import java.util.List;
@@ -8,7 +9,7 @@ import java.util.UUID;
 
 public interface PatientService {
 
-    List<Patient> getAllPatient();
+    List<PatientDto> getAllPatient();
 
-    Patient getPatientById(UUID id);
+    PatientDto getPatientById(UUID id);
 }

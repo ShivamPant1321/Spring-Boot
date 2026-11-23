@@ -1,8 +1,10 @@
 package com.SpringBootProject.MyHospitalManagementSystem.controllers;
 
+import com.SpringBootProject.MyHospitalManagementSystem.dto.PatientDto;
 import com.SpringBootProject.MyHospitalManagementSystem.entity.Patient;
 import com.SpringBootProject.MyHospitalManagementSystem.services.PatientService;
 import lombok.*;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -19,13 +21,13 @@ public class PatientController {
     private final PatientService patientService;
 
     @GetMapping
-    public List<Patient> getAllPatients(){
-        return patientService.getAllPatient();
+    public ResponseEntity<List<PatientDto>> getAllPatients(){
+        return ResponseEntity.ok(patientService.getAllPatient());
     }
 
     @GetMapping("/{id}")
-    public Patient getPatientById(@PathVariable UUID id){
-        return patientService.getPatientById(id);
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable UUID id){
+        return new ResponseEntity<>(patientService.getPatientById(id), HttpStatus.OK);
     }
 
 }
