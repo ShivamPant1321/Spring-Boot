@@ -1,0 +1,22 @@
+INSERT INTO patient (id, first_name, last_name, birth_date, gender, blood_group, phone_number, address, created_at, updated_at, insurance_id, nurse_id)
+VALUES
+    (gen_random_uuid(), 'Aarav', 'Sharma', '1998-05-14', 'MALE', 'O_pos', '9876543210', 'Model Town, Ludhiana, Punjab', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Priya', 'Verma', '2001-09-22', 'FEMALE', 'A_pos', '9876543211', 'Sector 22, Chandigarh', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Rahul', 'Mehta', '1985-12-10', 'MALE', 'B_pos', '9876543212', 'Civil Lines, Delhi', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Ananya', 'Kapoor', '1995-03-18', 'FEMALE', 'AB_pos', '9876543213', 'Bandra West, Mumbai, Maharashtra', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Vikram', 'Singh', '1978-07-25', 'MALE', 'O_neg', '9876543214', 'Civil Lines, Jaipur, Rajasthan', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Simran', 'Kaur', '2003-11-06', 'FEMALE', 'B_neg', '9876543215', 'Ferozepur Road, Ludhiana, Punjab', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Aditya', 'Gupta', '1990-01-30', 'MALE', 'A_neg', '9876543216', 'Indirapuram, Ghaziabad, Uttar Pradesh', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Neha', 'Malhotra', '1988-06-12', 'FEMALE', 'O_pos', '9876543217', 'Salt Lake, Kolkata, West Bengal', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Karan', 'Chopra', '1996-10-21', 'MALE', 'AB_neg', '9876543218', 'Whitefield, Bengaluru, Karnataka', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Ishita', 'Aggarwal', '2000-02-28', 'FEMALE', 'B_pos', '9876543219', 'Vasant Kunj, New Delhi', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Rohan', 'Bhatia', '1993-04-17', 'MALE', 'A_pos', '9876543220', 'Sector 17, Chandigarh', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Meera', 'Joshi', '1999-08-09', 'FEMALE', 'O_neg', '9876543221', 'Vaishali Nagar, Jaipur, Rajasthan', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Arjun', 'Patel', '1982-11-23', 'MALE', 'B_pos', '9876543222', 'Satellite Road, Ahmedabad, Gujarat', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Sneha', 'Reddy', '1997-02-15', 'FEMALE', 'AB_pos', '9876543223', 'Banjara Hills, Hyderabad, Telangana', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Manav', 'Saxena', '1975-06-30', 'MALE', 'A_neg', '9876543224', 'Civil Lines, Prayagraj, Uttar Pradesh', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Pooja', 'Mishra', '2002-12-05', 'FEMALE', 'B_neg', '9876543225', 'Aliganj, Lucknow, Uttar Pradesh', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Kabir', 'Malik', '1991-03-27', 'MALE', 'O_pos', '9876543226', 'Rajouri Garden, New Delhi', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Tanya', 'Arora', '1986-10-19', 'FEMALE', 'A_pos', '9876543227', 'Sarabha Nagar, Ludhiana, Punjab', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Dev', 'Nair', '2004-07-11', 'MALE', 'AB_neg', '9876543228', 'Kakkanad, Kochi, Kerala', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL),
+    (gen_random_uuid(), 'Ritika', 'Das', '1994-01-08', 'FEMALE', 'O_pos', '9876543229', 'Ballygunge, Kolkata, West Bengal', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL, NULL);
