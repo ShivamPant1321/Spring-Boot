@@ -39,3 +39,21 @@ VALUES
     (gen_random_uuid(), 'Aditya', 'Kulkarni', 'aditya.kulkarni@hospital.com', 'Urology', '1984-02-28', '9876543222', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (gen_random_uuid(), 'Pooja', 'Desai', 'pooja.desai@hospital.com', 'Pulmonology', '1992-07-11', '9876543223', 'FEMALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP),
     (gen_random_uuid(), 'Manish', 'Tiwari', 'manish.tiwari@hospital.com', 'General Surgery', '1976-09-08', '9876543224', 'MALE', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP);
+
+INSERT INTO nurse (first_name, last_name, date_of_birth, gender, phone_number, created_at, updated_at, department_id)
+VALUES
+    ('Simran', 'Kaur', '1994-03-18', 'FEMALE', '9812345601', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Harpreet', 'Gill', '1991-07-24', 'FEMALE', '9812345602', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Ritu', 'Sharma', '1995-11-09', 'FEMALE', '9812345603', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Deepak', 'Yadav', '1992-01-15', 'MALE', '9812345604', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Anjali', 'Menon', '1996-05-22', 'FEMALE', '9812345605', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Kiran', 'Bhatia', '1989-09-30', 'FEMALE', '9812345606', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Manpreet', 'Singh', '1993-04-12', 'MALE', '9812345607', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Divya', 'Chopra', '1997-08-05', 'FEMALE', '9812345608', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Sonal', 'Jain', '1990-12-19', 'FEMALE', '9812345609', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Nikhil', 'Rana', '1994-06-27', 'MALE', '9812345610', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Shreya', 'Das', '1995-02-14', 'FEMALE', '9812345611', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Komolika', 'Sen', '1992-10-08', 'FEMALE', '9812345612', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Pankaj', 'Thakur', '1991-03-21', 'MALE', '9812345613', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Nisha', 'Aggarwal', '1996-09-11', 'FEMALE', '9812345614', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL),
+    ('Tanya', 'Malik', '1993-11-29', 'FEMALE', '9812345615', CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, NULL);
