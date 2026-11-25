@@ -28,7 +28,7 @@ public class DoctorController {
     }
 
     @GetMapping("/{id}")
-    public DoctorDto getDoctorById(@PathVariable UUID id){
+    public DoctorDto getDoctorById(@PathVariable Long id){
         return doctorService.getDoctorById(id);
     }
 }

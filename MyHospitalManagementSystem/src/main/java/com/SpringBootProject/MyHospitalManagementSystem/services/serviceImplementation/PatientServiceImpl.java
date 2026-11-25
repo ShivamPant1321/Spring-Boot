@@ -32,7 +32,7 @@ public class PatientServiceImpl implements PatientService {
     }
 
     @Override
-    public PatientDto getPatientById(UUID id) {
+    public PatientDto getPatientById(Long id) {
         Patient patient = patientRepository.findById(id).orElseThrow();
         return modelMapper.map(patient, PatientDto.class);
     }

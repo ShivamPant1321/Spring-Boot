@@ -11,5 +11,5 @@ public interface PatientService {
 
     List<PatientDto> getAllPatient();
 
-    PatientDto getPatientById(UUID id);
+    PatientDto getPatientById(Long id);
 }

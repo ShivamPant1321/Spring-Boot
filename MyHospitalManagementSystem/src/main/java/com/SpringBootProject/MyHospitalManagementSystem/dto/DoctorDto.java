@@ -13,7 +13,7 @@ import java.util.UUID;
 @AllArgsConstructor
 @NoArgsConstructor
 public class DoctorDto {
-    private UUID id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String email;

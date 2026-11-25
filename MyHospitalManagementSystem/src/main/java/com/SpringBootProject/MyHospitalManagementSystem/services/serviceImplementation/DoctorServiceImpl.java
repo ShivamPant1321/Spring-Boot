@@ -32,7 +32,7 @@ public class DoctorServiceImpl implements DoctorService {
     }
 
     @Override
-    public DoctorDto getDoctorById(UUID id) {
+    public DoctorDto getDoctorById(Long id) {
         Doctor doctor = doctorRepository.findById(id).orElseThrow();
         return modelMapper.map(doctor, DoctorDto.class);
     }

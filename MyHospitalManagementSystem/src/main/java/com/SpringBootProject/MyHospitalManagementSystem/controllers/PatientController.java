@@ -26,7 +26,7 @@ public class PatientController {
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<PatientDto> getPatientById(@PathVariable UUID id){
+    public ResponseEntity<PatientDto> getPatientById(@PathVariable Long id){
         return new ResponseEntity<>(patientService.getPatientById(id), HttpStatus.OK);
     }
 
